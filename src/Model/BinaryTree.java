@@ -53,6 +53,7 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree() {
 		//TODO 01a
+		this.node = null;
 	}
 
 	/**
@@ -66,6 +67,11 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree(ContentType pContent) {
 		//TODO 01b
+		if(pContent != null){
+			this.node = new BTNode<>(pContent);
+		}else{
+			this.node = null;
+		}
 	}
 
 	/**
@@ -85,6 +91,24 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree(ContentType pContent, BinaryTree<ContentType> pLeftTree, BinaryTree<ContentType> pRightTree) {
 		//TODO 01c
+		if(pContent != null){
+			this.node = new BTNode<>(pContent);
+
+			if(pLeftTree != null){
+				this.node.left = pLeftTree;
+			}else{
+				this.node.left = new BinaryTree<>();
+			}
+
+			if(pRightTree != null){
+				this.node.right = pRightTree;
+			}else{
+				this.node.right = new BinaryTree<>();
+			}
+		}else{
+			this.node = null;
+		}
+
 	}
 
 	/**
@@ -95,7 +119,7 @@ public class BinaryTree<ContentType> {
 	 */
 	public boolean isEmpty() {
 		//TODO 01d
-		return false;
+		return this.getContent() != null;
 	}
 
 	/**
@@ -110,6 +134,16 @@ public class BinaryTree<ContentType> {
 	 */
 	public void setContent(ContentType pContent) {
 		//TODO 01e
+		if(pContent != null){
+			if(isEmpty()){
+				node.content = pContent;
+				node.left = null;
+				node.right = null;
+
+			}else{
+				node.content = pContent;
+			}
+		}
 	}
 
 	/**
@@ -121,7 +155,7 @@ public class BinaryTree<ContentType> {
 	 */
 	public ContentType getContent() {
 		//TODO 01f
-		return null;
+		return node.content;
 	}
 
 	/**
@@ -134,6 +168,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public void setLeftTree(BinaryTree<ContentType> pTree) {
 		//TODO 01g
+		if(pTree != null && !isEmpty()){
+			this.node.left = pTree;
+		}
 	}
 
 	/**
@@ -142,10 +179,13 @@ public class BinaryTree<ContentType> {
 	 * uebergebenen BinaryTree als rechten Teilbaum.
 	 * 
 	 * @param pTree
-	 *            neuer linker Teilbaum vom Typ BinaryTree<CT>
+	 *            neuer rechter Teilbaum vom Typ BinaryTree<CT>
 	 */
 	public void setRightTree(BinaryTree<ContentType> pTree) {
 		//TODO 01h
+		if(pTree != null && !isEmpty()){
+			this.node.right = pTree;
+		}
 	}
 
 	/**
@@ -157,7 +197,7 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree<ContentType> getLeftTree() {
 		//TODO 01i
-		return null;
+		return node.left;
 	}
 
 	/**
@@ -169,7 +209,7 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree<ContentType> getRightTree() {
 		//TODO 01j
-		return null;
+		return node.right;
 	}
 
 }
