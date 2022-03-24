@@ -21,11 +21,61 @@ public class MainController {
      */
     private void createMorseTree(){
         //TODO 02: Vervollständige den Morsebaum. Such bei google nach "morsecode as tree" als Vorlage. Das hilft, die Übersicht zu wahren.
-        BinaryTree<String> left = new BinaryTree<>("E");
-        BinaryTree<String> right = new BinaryTree<>("T");
 
-        binaryTree.setLeftTree(left);
-        binaryTree.setRightTree(right);
+
+        //1
+        BinaryTree<String> v = new BinaryTree<>("V");
+        BinaryTree<String> h = new BinaryTree<>("H");
+        BinaryTree<String> s = new BinaryTree<>("S",h,v);
+
+        BinaryTree<String> f = new BinaryTree<>("F");
+        BinaryTree<String> u = new BinaryTree<>("U",f,null);
+
+        BinaryTree<String> i = new BinaryTree<>("I",s,u);
+
+        //2
+        BinaryTree<String> l = new BinaryTree<>("L");
+        BinaryTree<String> r = new BinaryTree<>("R",l,null);
+
+        BinaryTree<String> p = new BinaryTree<>("P");
+        BinaryTree<String> j = new BinaryTree<>("J");
+
+        BinaryTree<String> w = new BinaryTree<>("W",p,j);
+
+        BinaryTree<String> a = new BinaryTree<>("A",r,w);
+
+
+        //EEEEEE
+        BinaryTree<String> e = new BinaryTree<>("E",i,a);
+        binaryTree.setLeftTree(e);
+
+        //3
+        BinaryTree<String> b = new BinaryTree<>("B");
+        BinaryTree<String> x = new BinaryTree<>("X");
+
+        BinaryTree<String> d = new BinaryTree<>("D",b,x);
+
+        BinaryTree<String> c = new BinaryTree<>("C");
+        BinaryTree<String> y = new BinaryTree<>("Y");
+
+        BinaryTree<String> k = new BinaryTree<>("K",c,y);
+
+
+        BinaryTree<String> n = new BinaryTree<>("N",d,k);
+
+        //4
+        BinaryTree<String> z = new BinaryTree<>("Z");
+        BinaryTree<String> q = new BinaryTree<>("Q");
+
+        BinaryTree<String> g = new BinaryTree<>("G",z,q);
+
+        BinaryTree<String> o = new BinaryTree<>("O");
+
+        BinaryTree<String> m = new BinaryTree<>("M",g,o);
+
+        //TTTTTTT
+        BinaryTree<String> t = new BinaryTree<>("T",n,m);
+        binaryTree.setRightTree(t);
     }
 
     /**
@@ -59,6 +109,16 @@ public class MainController {
         if (!tree.isEmpty()) {
             TreeNode node = new TreeNode(startX, startY, 10, tree.getContent().toString(), false);
             panel.addObject(node);
+
+            if(!tree.getLeftTree().isEmpty()) {
+                panel.addObject(new TreeNode(startX-20,startY-10, , ));
+                showTree(tree.getLeftTree(), panel, startX - spaceToTheSide, startY + 80, spaceToTheSide / 2);
+            }
+
+            if(!tree.getRightTree().isEmpty()) {
+                showTree(tree.getRightTree(), panel, startX + spaceToTheSide, startY + 80, spaceToTheSide / 2);
+            }
+
         }
 		
 		
