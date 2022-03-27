@@ -3,6 +3,7 @@ package Control;
 import Model.BinaryTree;
 import View.DrawingPanel;
 import View.TreeView.TreeNode;
+import View.TreeView.TreePath;
 
 /**
  * Created by Jean-Pierre on 12.01.2017.
@@ -111,11 +112,12 @@ public class MainController {
             panel.addObject(node);
 
             if(!tree.getLeftTree().isEmpty()) {
-                panel.addObject(new TreeNode(startX-20,startY-10, , ));
+                panel.addObject(new TreePath(startX-10,startY, startX - spaceToTheSide-10, startY + 60, 10, false));
                 showTree(tree.getLeftTree(), panel, startX - spaceToTheSide, startY + 80, spaceToTheSide / 2);
             }
 
             if(!tree.getRightTree().isEmpty()) {
+                panel.addObject(new TreePath(startX-10,startY, startX + spaceToTheSide-10, startY + 60, 10, false));
                 showTree(tree.getRightTree(), panel, startX + spaceToTheSide, startY + 80, spaceToTheSide / 2);
             }
 
@@ -131,7 +133,7 @@ public class MainController {
      * @return Das Ergebnis der Traversierung als Zeichenkette.
      */
     public String traverse(){
-        return traverse(binaryTree);
+        return traversePost(binaryTree) + countNodes(binaryTree);
     }
 
     /**
@@ -139,18 +141,40 @@ public class MainController {
      * @param tree Der zu traversierende Binärbaum.
      * @return Das Ergebnis der Traversierung als Zeichenkette.
      */
-    private String traverse(BinaryTree tree){
+    private String traverseIn(BinaryTree tree){ //Inorder - Traversierung
         //TODO 04: Nachdem wir geklärt haben, was eine Traversierung ist, muss diese Methode noch vervollständigt werden. Sollte ein Kinderspiel sein.
-        return "Traverse? Wat dat denn?";
+        if(!tree.isEmpty()) {
+            return traverseIn(tree.getLeftTree()) + tree.getContent() + traverseIn(tree.getRightTree());
+        }
+        return " / ";
     }
-	
+
+    private String traversePre(BinaryTree tree){ //Preorder - Traversierung
+        //TODO 04: Nachdem wir geklärt haben, was eine Traversierung ist, muss diese Methode noch vervollständigt werden. Sollte ein Kinderspiel sein.
+        if(!tree.isEmpty()) {
+            return tree.getContent() + " / " + traversePre(tree.getLeftTree()) + traversePre(tree.getRightTree());
+        }
+        return "";
+    }
+
+    private String traversePost(BinaryTree tree){ //Postorder - Traversierung
+        //TODO 04: Nachdem wir geklärt haben, was eine Traversierung ist, muss diese Methode noch vervollständigt werden. Sollte ein Kinderspiel sein.
+        if(!tree.isEmpty()) {
+            return traversePost(tree.getLeftTree()) + traversePost(tree.getRightTree()) + " / " +  tree.getContent();
+        }
+        return "";
+    }
+
+
     /**
      * Interne Übungsmethode zur Traversierung.
      * @param tree Der zu traversierende Binärbaum.
      * @return Die Anzahl der Knoten in diesem Baum
      */
     private int countNodes(BinaryTree tree){
-        //TODO 05: Übungsmethode
-	return 0;
+        if(!tree.isEmpty()) {
+            return 1 + countNodes(tree.getRightTree()) + countNodes(tree.getLeftTree());
+        }
+	    return 0;
     }
 }
