@@ -133,7 +133,7 @@ public class MainController {
      * @return Das Ergebnis der Traversierung als Zeichenkette.
      */
     public String traverse(){
-        return traversePost(binaryTree) + countNodes(binaryTree);
+        return traversePre(binaryTree) + "\n" + traverseIn(binaryTree) + "\n" + traversePost(binaryTree) + "\n" + countNodes(binaryTree);
     }
 
     /**
